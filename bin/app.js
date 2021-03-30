@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const queryString = require('querystring')
 const compression = require('compression')
 
-const proxyHost = 'http://xxxx:3001' // docker port
+const proxyHost = 'http://localhost:1234' // 后台接口转发
 
 const pino = PinoLogger({
   prettyPrint: {
@@ -22,7 +22,7 @@ app.use(compression())
 
 app.use(bodyParser.json())
 
-app.use(express.static(path.join(__dirname, '..')))
+app.use(express.static(path.join(__dirname, '..', 'build')))
 
 app.use(
   '/api/v1',
@@ -67,7 +67,7 @@ app.use('/assert_call', proxy({ target: proxyHost })) // 图片资源录音资�
 app.use('/group1', proxy({ target: proxyHost })) // 图片资源代理到网关
 
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '..', 'index.html'))
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'))
 })
 
 module.exports = app
