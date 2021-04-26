@@ -61,7 +61,7 @@ app.use(
   })
 ) // 代理http请求
 
-app.use('/assert', proxy({ target: proxyHost })) // 图片资源代理到网关
+app.use('/file', proxy({ target: proxyHost })) // 图片资源代理到网关
 
 app.use('/assert_call', proxy({ target: proxyHost })) // 图片资源录音资源代理到网关
 app.use('/group1', proxy({ target: proxyHost })) // 图片资源代理到网关
